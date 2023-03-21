@@ -1,4 +1,5 @@
-words = recognizer.recognize_google(audio)
+import speech_recognition as sr
+words = sr.recognizer.recognize_google("audio")
 
 # Respond to speech
 if "hello" in words:
