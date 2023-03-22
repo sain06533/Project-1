@@ -2,7 +2,7 @@
 import pyttsx3 #pip install pyttsx3
 import datetime
 import speech_recognition as sr # pip install SpeechRecognition
-import wikipedia#pip install wikipedia
+import wiki#pip install wikipedia
 
 engine = pyttsx3.init()
 voice = engine.getProperty('voices')
@@ -52,20 +52,21 @@ def takeCommand():
     r = sr.Recognizer()
     with sr.Microphone() as source:
         print("Listening......")
-        r.pause_threshold = 1
         audio = r.listen(source)
+        said=r.recognize_google(audio)
+        print(said)
 
-        try:
-            print("Recoginzing....")
-            query = r.recognize_google(audio, 'en=US')
-            print(query)
-        except Exception as e:
-            print(e)
-            speak(f"I'm sorry, I couldn't recognise your voice {name}, Would you mind Saying it again?")
+        #try:
+         #   print("Recoginzing....")
+          #  query = r.recognize_google(audio, 'en=US')
+           # print(query)
+        #except Exception as e:
+         #   print(e)
+          #  speak(f"I'm sorry, I couldn't recognise your voice {name}, Would you mind Saying it again?")
 
-            return "None"
+           # return "None"
 
-    return query
+    #return query
 
 if __name__ == "__main__":
 
@@ -84,5 +85,5 @@ if __name__ == "__main__":
         elif "wikipedia" in query:
             speak("Searching....")
             query = query.replace("wikipedia", "")
-            result = wikipedia.summary(query, sentences = 2)
+            result = wiki.summary(query, sentences = 2)
             speak(result)
